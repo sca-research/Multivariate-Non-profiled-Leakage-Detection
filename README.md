@@ -12,4 +12,7 @@ We have considered both simulated and practical case studies for our implementat
 - We have considered a practical case study for the side-channel traces from an unprotected implementation of PRESENT block cipher as provided by [DL-LA](https://github.com/Chair-for-Security-Engineering/DL-LA). The download instructions for this dataset are available in [PRESENT-RC](https://github.com/Palash123-4/Multivariate-Non-profiled-Leakage-Detection/tree/main/PRESENT-RC)   
 
 # Acknowledgment
-This project is supported in part by the Austrian Science Fund (FWF) 10.55776/F85 (SFB SpyCode) and by the  EU Horizon project (enCrypton, grant agreement number 101079319) 
+This project is supported in part by the Austrian Science Fund (FWF) 10.55776/F85 (SFB SpyCode) and by the  EU Horizon project (enCrypton, grant agreement number 101079319).
+
+! [Spycode Logo](https://github.com/Palash123-4/Multivariate-Non-profiled-Leakage-Detection/blob/main/spycode.png)
+![EU Logo](https://github.com/Palash123-4/Multivariate-Non-profiled-Leakage-Detection/blob/main/CERV-Acknowlegments.png)
