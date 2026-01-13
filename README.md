@@ -14,5 +14,5 @@ We have considered both simulated and practical case studies for our implementat
 # Acknowledgment
 This project is supported in part by the Austrian Science Fund (FWF) 10.55776/F85 (SFB SpyCode) and by the  EU Horizon project (enCrypton, grant agreement number 101079319).
 
-! [Spycode Logo](https://github.com/Palash123-4/Multivariate-Non-profiled-Leakage-Detection/blob/main/spycode.png)
+![Spycode Logo](https://github.com/Palash123-4/Multivariate-Non-profiled-Leakage-Detection/blob/main/spycode.png)
 ![EU Logo](https://github.com/Palash123-4/Multivariate-Non-profiled-Leakage-Detection/blob/main/CERV-Acknowlegments.png)
