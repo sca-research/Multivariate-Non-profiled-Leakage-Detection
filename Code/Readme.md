@@ -9,4 +9,7 @@ This code is written in Python 3.9.21 and is mainly based on Numpy = 1.23.5, pan
 - matplotlib
 - tqdm
   
-These ``Python`` modules can be installed by running: <p>sudo pip install numpy scipy pandas dcor mpmath numba matplotlib tqdm<p> 
+These ``Python`` modules can be installed by running: 
+```
+sudo pip install numpy scipy pandas dcor mpmath numba matplotlib tqdm
+``` 
