@@ -8,4 +8,5 @@ This code is written in Python 3.9.21 and is mainly based on Numpy = 1.23.5, pan
 - [numba >= 0.51](https://numba.pydata.org/)
 - matplotlib
 - tqdm
+  
 These ``Python`` modules can be installed by running: ``` sudo pip install numpy scipy pandas dcor mpmath numba matplotlib tqdm ```
