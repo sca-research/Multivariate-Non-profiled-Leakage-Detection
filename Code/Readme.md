@@ -35,11 +35,11 @@ python3 Leakage_Detection.py
 You will observe a comparison in the True positive rate between MV-dcov and the multiplicity correction related to classical TVLA (Welch's $T$-test), representing **figures 1 and 2** of the published version. 
 
 3. Leakage Detection on PRESENT-RC dataset:
-- For point-wise leakage detection, uncomment 'PRESENT_RC_pointwise()' in 'Leakage_Detection.py' and then run:
+- For point-wise leakage detection, uncomment ``PRESENT_RC_pointwise()`` in ``Leakage_Detection.py`` and then run:
 ```
 python3 Leakage_Detection.py
 ```
-- For multivariate leakage detection (i.e., comparing True positive rates), uncomment 'PRESENT_RC_multivariate()' in 'Leakage_Detection.py' and then run:
+- For multivariate leakage detection (i.e., comparing True positive rates), uncomment ``PRESENT_RC_multivariate()`` in ``Leakage_Detection.py`` and then run:
 ```
 python3 Leakage_Detection.py
 ```
