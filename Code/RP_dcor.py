@@ -4,7 +4,7 @@ A Statistically and Numerically Efficient Independence Test Based on Distance Co
 url: https://www.frontiersin.org/articles/10.3389/fams.2021.779841/full
 '''
 import numpy as np
-from dcor import u_distance_covariance_sqr, rowwise
+from dcor import u_distance_covariance_sqr, u_distance_correlation_sqr, rowwise
 from scipy.stats import multivariate_normal
 from scipy.stats import gamma as GM
 import math
