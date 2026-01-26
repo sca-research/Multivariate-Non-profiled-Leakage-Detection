@@ -55,14 +55,14 @@ def simulated_exp():
     z = []
     for n_trace in range(50, 250, 50):
         print("Number of Traces = {}".format(n_trace))
-        count_1 = 0
+        # count_1 = 0
         # count_2 = 0
-        # count_3 = 0
+        count_3 = 0
         # count_MI = 0
 
-        count_TVLA = 0
+        # count_TVLA = 0
         # count_gtest = 0
-        # count_chi_sqr = 0
+        count_chi_sqr = 0
         # count_dcor = 0
 
         V_vector = np.repeat(x, n_trace) ## 0-1 valued variable
@@ -84,67 +84,71 @@ def simulated_exp():
             ############################## 
             '''Considering Multivariate Tests from MV_tests.py''' 
             # make sure input of the dcov metric is NxD and Nx1
-            statistic_1, cutoff_1 = u_dist_cov_sqr_mv_test(Tr.astype('float'),
-                                                           V_vector.astype('float'), n_projs = 100)
+            # statistic_1, cutoff_1 = u_dist_cov_sqr_mv_test(Tr.astype('float'),
+            #                                                V_vector.astype('float'), n_projs = 100)
             # statistic_2, cutoff_2 = TwoSampleT2Test( 
             #    n_trace, n_dim, Tr_random, Tr_fixed)
-            # statistic_3, cutoff_3 = diag_test(
-            #    n_trace, n_dim, Tr_random,  Tr_fixed)
+            statistic_3, cutoff_3 = diag_test(n_trace, n_trace, n_dim, Tr_random,  Tr_fixed)
+            
             # To use mv_gtest one have to Digitise the trace please see Digitizer class in testnbr_dist_1.py
             # statistic_4, cutoff_4 = mv_gtest(Tr, V_vector)    
             
 
-            if statistic_1 > cutoff_1:
-                count_1 += 1
+            # if statistic_1 > cutoff_1:
+            #     count_1 += 1
             # if statistic_2 > cutoff_2:
             #    count_2 += 1
-            # if statistic_3 > cutoff_3:
-            #    count_3 += 1
+            if statistic_3 > cutoff_3:
+               count_3 += 1
             # if statistic_4 > cutoff_4:
             #     count_MI += 1
+            
+            # # # Digitize traces for G-test and chi-square test-----------------------------
+            digit_1 = Digitizer( 9, np.min(Tr_random), np.max(Tr_random))
+            digit_2 = Digitizer( 9, np.min(Tr_fixed) , np.max(Tr_fixed))
+            Tr_new = np.concatenate(( digit_1.digitize(Tr_fixed), digit_2.digitize(Tr_random)))
+           
 
 
 
             '''Considering Multiplicity Corrections for leakage detections from MV_tests.py''' 
-            if TVLA_adjusted_alpha(n_dim, np.array(Tr_random), np.array(Tr_fixed)) >= 1:
-               count_TVLA += 1
+            # if TVLA_adjusted_alpha(n_dim, np.array(Tr_random), np.array(Tr_fixed)) >= 1:
+            #    count_TVLA += 1
             # if gtest_adjusted_alpha(n_dim, Tr, V_vector ) >= 1:
             #     count_gtest += 1
-            # if chi_sqr_adjusted_alpha( n_dim, Tr, V_vector) >= 1:
-            #     count_chi_sqr += 1
+            
+            if chi_sqr_adjusted_alpha( n_dim, Tr_new, V_vector) >= 1:
+                count_chi_sqr += 1
             # if dcor_adjusted_alpha(n_dim, Tr.astype('float'), V_vector.astype('float')) >= 1:
             #     count_dcor += 1
         
                 
         
         ''' Computing True Positive rates for n_trial number of iterations '''
-        count_1 = count_1 / n_trial
+        # count_1 = count_1 / n_trial
         # count_2 = count_2 / n_trial
-        # count_3 = count_3 / n_trial
+        count_3 = count_3 / n_trial
         # count_MI = count_MI / n_trial
 
-        count_TVLA = count_TVLA / n_trial
+        # count_TVLA = count_TVLA / n_trial
         # count_gtest = count_gtest / n_trial
-        # count_chi_sqr = count_chi_sqr / n_trial
+        count_chi_sqr = count_chi_sqr / n_trial
         # count_dcor = count_dcor / n_trial
 
-        print("\nTrue Positive Rate with mv_dcov_test = {}".format(count_1))
+        # print("\nTrue Positive Rate with mv_dcov_test = {}".format(count_1))
         # print("True Positive Rate with mv_gtest = {}".format(count_MI))
         # print("True Positive Rate with hotelling's $T^2$ test = {}".format(count_2))
-        # print("True Positive Rate with D-test = {}".format(count_3))
+        print("True Positive Rate with D-test = {}".format(count_3))
 
-        print(
-           "True Positive Rate with TVLA + adjusted_pvalue  = {}".format(count_TVLA))
+        # print("True Positive Rate with TVLA + adjusted_pvalue  = {}".format(count_TVLA))
         # print("True Positive Rate with gtest + adjusted_pvalue  = {}".format(count_gtest))
-        # print("True Positive Rate with chi_square + adjusted_pvalue  = {}".format(count_chi_sqr))
+        print("True Positive Rate with chi_square + adjusted_pvalue  = {}".format(count_chi_sqr))
         # print("True Positive Rate with dcor + adjusted_pvalue  = {}".format(count_dcor))
         
         
-        z.append([n_trace, count_1 , count_TVLA])
-        # z.append([n_trace, count_1, count_2, count_3, count_MI])
-        # z.append([n_trace, count_1, count_2, count_3])
-        # z.append([n_trace, count_TVLA, count_gtest, count_chi_sqr, count_dcor])
-        # z.append([n_trace, count_1, count_2, count_3, count_TVLA, count_dcor])
+        # z.append([n_trace, count_1 , count_TVLA])
+        z.append([n_trace, count_3 , count_chi_sqr])
+       
     
     
     ''' Saving the true positive rates w.r.t number of traces in a .npy file '''
@@ -378,6 +382,6 @@ def PRESENT_RC_multivariate():
 
 
 if __name__== '__main__':
-    simulated_exp()
+    # simulated_exp()
     # PRESENT_RC_pointwise()
     # PRESENT_RC_multivariate()
