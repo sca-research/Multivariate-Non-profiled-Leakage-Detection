@@ -43,7 +43,8 @@ results = run_all_tests(
                enabled_tests=["mv_dcov", "tvla"],
                 )
 ```
-At present, we call only one multivariate test: ``"mv_dcov"`` and one univariate test with multiplicity correction: `` "tvla" ``. You can call all 8 tests from ``leakage_test_runner.py``
+At present, we call only one multivariate test: ``"mv_dcov"`` and one univariate test with multiplicity correction: `` "tvla" ``. You can call all 8 tests from ``leakage_test_runner.py``.
+
 3. Leakage Detection on PRESENT-RC dataset:
 - First, consider the data `` Traces_PRESENT_RC.npy `` from  [PRESENT-RC](https://github.com/sca-research/Multivariate-Non-profiled-Leakage-Detection/tree/main/PRESENT-RC) folder
 - For point-wise leakage detection, uncomment ``PRESENT_RC_pointwise()`` in ``out_of_the_box_exp.py`` and then run:
