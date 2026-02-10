@@ -1,11 +1,11 @@
 ### REQUIREMENTS:
-This code is written in Python 3.9.21 and is mainly based on Numpy = 1.23.5, pandas = 2.2.3, and Scipy 1.12 running on a Linux or Windows distribution. The required packages are:
-- numpy
-- scipy
-- pandas
-- [dcor](https://dcor.readthedocs.io/en/stable/apilist.html)
-- [mpmath](https://mpmath.org/)
-- [numba >= 0.51](https://numba.pydata.org/)
+This code is written in Python 3.9.21 and is primarily based on Numpy 1.23.5, pandas 2.2.3, and Scipy 1.12, running on Linux or Windows. The required packages are:
+- numpy==1.2.5
+- scipy==1.12
+- pandas==2.2.3
+- [dcor==0.6](https://dcor.readthedocs.io/en/stable/apilist.html)
+- [mpmath==1.3.0](https://mpmath.org/)
+- [numba==0.60.0](https://numba.pydata.org/)
 - matplotlib
 - tqdm
   
