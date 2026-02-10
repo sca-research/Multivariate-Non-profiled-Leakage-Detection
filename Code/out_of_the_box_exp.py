@@ -22,6 +22,11 @@ from mpmath import*
 from scipy.special import gammaln
 
 
+
+## for running one of the main function
+import argparse
+
+
 def chisquare_cdf(x, k):
     # This is related to mpmath specification, only affect the mpmath related functions
     mp.dps = 25
@@ -317,9 +322,41 @@ def PRESENT_RC_multivariate():
 
 
 
+def parse_args():
+    parser = argparse.ArgumentParser(
+        description="Run out-of-the-box leakage detection experiments"
+    )
+
+    parser.add_argument(
+        "--exp",
+        required=True,
+        choices=[
+            "simulated_exp",
+            "present_pointwise",
+            "present_multivariate",
+        ],
+        help="Experiment to run",
+    )
+
+    return parser.parse_args()
 
 
-if __name__== '__main__':
-    simulated_exp()
-    # PRESENT_RC_pointwise()
-    # PRESENT_RC_multivariate()
+
+if __name__ == "__main__":
+    args = parse_args()
+
+    if args.exp == "simulated_exp":
+        simulated_exp()
+
+    elif args.exp == "present_pointwise":
+        PRESENT_RC_pointwise()
+
+    elif args.exp == "present_multivariate":
+        PRESENT_RC_multivariate()
+        
+
+
+
+
+
+
