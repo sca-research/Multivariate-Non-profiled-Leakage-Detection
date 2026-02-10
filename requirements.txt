@@ -1,0 +1,11 @@
+# Requirements of python packages 
+
+pyyaml==6.0.2
+numpy==1.23.5
+scipy==1.12
+pandas==2.2.3
+dcor==0.6
+mpmath
+numba==0.60.0
+matplotlib
+tqdm
