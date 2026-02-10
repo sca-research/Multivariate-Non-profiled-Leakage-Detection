@@ -55,8 +55,10 @@ results_ = run_all_tests(
 The class ``Digitizer`` is defined in [testnbr_dist_1.py](https://github.com/Palash123-4/Multivariate-Non-profiled-Leakage-Detection/blob/main/Code/testnbr_dist_1.py) .
 
 You can call any subset of 8 tests from ``[ "mv_dcov", "hotelling", "diag", "mv_gtest", "tvla", "dcor", "chi2", "gtest"]``. This simulation experiment should be considered to reproduce figures **$1$ and $2$** of the paper.
+
 **Figure $1$** is related to univariate tests, i.e., `` ["tvla", "dcor", "chi2", "gtest"] ``:
 ![Figure 1](https://github.com/sca-research/Multivariate-Non-profiled-Leakage-Detection/blob/main/Code/Figure_1.png)
+
 **Figure $2$** is related to multivariate tests. i.e. ``["mv_dcov", "hotelling", "diag", "mv_gtest"]``:
 ![Figure 2](https://github.com/sca-research/Multivariate-Non-profiled-Leakage-Detection/blob/main/Code/Figure_2.png)
 
@@ -74,8 +76,9 @@ You can see, it will reproduce the figure **8a.** of the paper (see the attached
 python3 out_of_the_box_exp.py --exp present_multivariate
 ```
 Like experiment 2, you can make changes to the callable ``run_all_tests()`` to replicate our results, as given in figures **8b and 8c**. 
-At present, we only run for the best (in terms of producing better true positive rate) multivariate test (i.e., the $D$-test, the red solid line in 8c), and the best univariate test ( $G$-test, the green dashed line in 8b)
-The Figure 8 in the paper is represented as follows:
+At present, we only run for the best (in terms of producing better true positive rate) multivariate test (i.e., the $D$-test, the red solid line in 8c), and the best univariate test ( $G$-test, the green dashed line in 8b).
+
+Figure 8 in the paper is represented as follows:
 ![Figure 8a](https://github.com/sca-research/Multivariate-Non-profiled-Leakage-Detection/blob/main/Code/Figure_8.png)
 
 It is important to mention that this repository is limited only to the non-profiled leakage detection tests. To get the results corresponding to the Deep-net models, we recommend using the publicly available [DL-LA](https://github.com/Chair-for-Security-Engineering/DL-LA?tab=readme-ov-file) git repository. 
