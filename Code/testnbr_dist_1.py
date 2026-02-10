@@ -79,10 +79,10 @@ def mv_trace(n_trace, n_dim, sbox, ckey, sigma, fix_input = False):
         s_out = np.empty(n_dim, dtype = np.uint8)
         s_out[0] = sbox[pt[i] ^ ckey]
                
-        Tr[i, 0] =  float(ham_wt(s_out[0])) + np.random.normal(0,sigma,1) 
-        # Tr[i, 0] = float(Non_lin(s_out[0])) + np.random.normal(0,sigma,1)
-        # Tr[i, 0] =  int(ham_wt(s_out[0])) + dlaplace.rvs(sigma, 1)                 
-        # Tr[i, 0] =  int(Non_lin(s_out[0]) + dlaplace.rvs(sigma, 1))                 
+        Tr[i, 0] =  float(ham_wt(s_out[0])) + np.random.normal(0,sigma,1)     # for ham_wt(Y) + gaussian noise  
+        # Tr[i, 0] = float(Non_lin(s_out[0])) + np.random.normal(0,sigma,1)    # for non_lin(Y) + gaussian noise
+        # Tr[i, 0] =  int(ham_wt(s_out[0])) + dlaplace.rvs(sigma, 1)  # for ham_wt(Y) + discrete laplacian noise               
+        # Tr[i, 0] =  int(Non_lin(s_out[0]) + dlaplace.rvs(sigma, 1)) # for non_lin(Y) + discrete laplacian noise                
         
         for j in range(1, n_dim):
             s_out[j] = sbox[s_out[j-1] ^ round_key[j-1]]
