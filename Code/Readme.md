@@ -51,9 +51,13 @@ At present, we call only one multivariate test: ``"mv_dcov"`` and one univariate
 ```
 python3 out_of_the_box_exp.py
 ```
+You can see, it will produce figure **8a.** of the paper.
+
+![Figure 8a](https://github.com/sca-research/Multivariate-Non-profiled-Leakage-Detection/blob/main/Code/leakage_detection_unprot_PRESENT_misaligned_new.png)
+
 - For multivariate leakage detection (i.e., comparing True positive rates), uncomment ``PRESENT_RC_multivariate()`` in ``out_of_the_box_exp.py`` and then run:
 ```
 python3 out_of_the_box_exp.py
 ```
-Like experiment 2, you can make changes to the callable ``run_all_tests()`` to replicate our results, as given in **Figure 8**. 
+Like experiment 2, you can make changes to the callable ``run_all_tests()`` to replicate our results, as given in Figures **8b and 8c**. 
 This repository is limited only to the non-profiled leakage detection tests. To get the results of Deep-net models, we recommend using the publicly available [DL-LA](https://github.com/Chair-for-Security-Engineering/DL-LA?tab=readme-ov-file) git repository. 
