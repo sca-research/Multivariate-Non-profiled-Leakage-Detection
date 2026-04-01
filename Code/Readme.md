@@ -28,10 +28,10 @@ python3 RP_dcor.py
 ```
 Apart from scalability, the correctness of our parallel implementation of Mv-dcov was verified by uncommenting the ``checking_correctness()`` main function in RP_dcor.py. We have implemented the fast MV-dcov utilising the published paper on [A Statistically and Numerically Efficient Independence Test Based on Random Projections and Distance Covariance](https://www.frontiersin.org/journals/applied-mathematics-and-statistics/articles/10.3389/fams.2021.779841/full#supplementary-material). Here is the snippet of the run-time scalability test of MV-dcov:
 
-<div style="height:200px; width:200px; overflow:auto; border:1px solid #ccc;">
+<div style="height:300px; width:500px; overflow:auto; border:1px solid #ccc;">
   <img 
     src="https://raw.githubusercontent.com/sca-research/Multivariate-Non-profiled-Leakage-Detection/main/Code/Screenshot_run_time.png"
-    style="min-width:400px; min-height:400px;"
+    style="min-width:700px; min-height:800px;"
   >
 </div>>
 
