@@ -33,7 +33,7 @@ Apart from scalability, the correctness of our parallel implementation of Mv-dco
     src="https://raw.githubusercontent.com/sca-research/Multivariate-Non-profiled-Leakage-Detection/main/Code/Screenshot_run_time.png"
     style="min-width:700px; min-height:800px;"
   >
-</div>>
+</div>
 
 2. Simulated Multivariate Leakage Detection:
 For the simulated leakage detection, please run:
