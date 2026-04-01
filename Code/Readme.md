@@ -1,5 +1,5 @@
 ### REQUIREMENTS:
-This code is written in Python 3.9.21 and is primarily based on Numpy 1.23.5, pandas 2.2.3, and Scipy 1.12, running on Linux or Windows. The required packages are:
+This code is written in Python 3.9.21 and primarily uses Numpy 1.23.5, pandas 2.2.3, and Scipy 1.12, running on Linux or Windows. The required packages are:
 - numpy==1.2.5
 - scipy==1.12
 - pandas==2.2.3
@@ -26,7 +26,7 @@ We are mainly examining three types of experiments:
 ```
 python3 RP_dcor.py
 ```
-Apart from scalability, the correctness of our parallel implementation of Mv-dcov was verified by uncommenting the ``checking_correctness()`` main function in RP_dcor.py. We have implemented the fast MV-dcov utilizing the published paper on [A Statistically and Numerically Efficient Independence Test Based on Random Projections and Distance Covariance](https://www.frontiersin.org/journals/applied-mathematics-and-statistics/articles/10.3389/fams.2021.779841/full#supplementary-material). Here is the snippets of run-time scalability test of MV-dcov:
+Apart from scalability, the correctness of our parallel implementation of Mv-dcov was verified by uncommenting the ``checking_correctness()`` main function in RP_dcor.py. We have implemented the fast MV-dcov utilising the published paper on [A Statistically and Numerically Efficient Independence Test Based on Random Projections and Distance Covariance](https://www.frontiersin.org/journals/applied-mathematics-and-statistics/articles/10.3389/fams.2021.779841/full#supplementary-material). Here is the snippet of the run-time scalability test of MV-dcov:
 
 <div style="height:200px; width:200px; overflow:auto; border:1px solid #ccc;">
   <img 
@@ -61,7 +61,7 @@ results_ = run_all_tests(
 ```
 The class ``Digitizer`` is defined in [testnbr_dist_1.py](https://github.com/Palash123-4/Multivariate-Non-profiled-Leakage-Detection/blob/main/Code/testnbr_dist_1.py) .
 
-At present three abforementioned tests are considered for the out-of-the-box simulated experiment and stored in [HW_Norm_0.005_50.npy](https://github.com/sca-research/Multivariate-Non-profiled-Leakage-Detection/blob/main/Code/HW_Norm_0.005_50.npy). The snippet of the present compilation is given below:
+At present, three aforementioned tests are considered for the out-of-the-box simulated experiment and stored in [HW_Norm_0.005_50.npy](https://github.com/sca-research/Multivariate-Non-profiled-Leakage-Detection/blob/main/Code/HW_Norm_0.005_50.npy). The snippet of the present compilation is given below:
 
 <div style="height:200px; width:200px; overflow:auto; border:1px solid #ccc;">
   <img 
@@ -71,7 +71,7 @@ At present three abforementioned tests are considered for the out-of-the-box sim
 </div>
 
 
-You can call any subset of 8 tests from ``[ "mv_dcov", "hotelling", "diag", "mv_gtest", "tvla", "dcor", "chi2", "gtest"]`` and able to reproduce figures **$1$ and $2$** of the paper.
+You can call any subset of 8 tests from ``[ "mv_dcov", "hotelling", "diag", "mv_gtest", "tvla", "dcor", "chi2", "gtest"]`` and be able to reproduce figures **$1$ and $2$** of the paper.
 
 **Figure $1$** is related to univariate tests, i.e., `` ["tvla", "dcor", "chi2", "gtest"] ``:
 ![Figure 1](https://github.com/sca-research/Multivariate-Non-profiled-Leakage-Detection/blob/main/Code/Figure_1.png)
@@ -86,16 +86,20 @@ You can call any subset of 8 tests from ``[ "mv_dcov", "hotelling", "diag", "mv_
 ```
 python3 out_of_the_box_exp.py --exp present_pointwise
 ```
-You can see, it will reproduce the figure **8a.** of the paper (see the attached figure at the bottom).
+You can see that it reproduces figure **8a** of the paper (see the attached figure at the bottom).
 
 - For multivariate leakage detection (i.e., comparing True positive rates), run:
 ```
 python3 out_of_the_box_exp.py --exp present_multivariate
-```
-Like experiment 2, you can make changes to the callable ``run_all_tests()`` to replicate our results, as given in figures **8b and 8c**. 
-At present, we only run for the best (in terms of producing better true positive rate) multivariate test (i.e., the $D$-test, the red solid line in 8c), and the best univariate test ( $G$-test, the green dashed line in 8b).
+``` 
+At present, we only run for the best (in terms of producing a better true positive rate) multivariate test (i.e., the $D$-test, the red solid line in **8c**), and the best univariate test ( $G$-test, the green dashed line in **8b**). The snippets of the multivariate tests are as follows:
+<div style="height:300px; width:500px; overflow-y:auto;">
+  <img src="https://raw.githubusercontent.com/sca-research/Multivariate-Non-profiled-Leakage-Detection/main/Code/Screenshot_PRESENT_RC_1.png" style="width:100%;">
+  <img src="https://raw.githubusercontent.com/sca-research/Multivariate-Non-profiled-Leakage-Detection/main/Code/Screenshot_PRESENT_RC_2.png" style="width:100%;">
+  <img src="https://raw.githubusercontent.com/sca-research/Multivariate-Non-profiled-Leakage-Detection/main/Code/Screenshot_PRESENT_RC_3.png" style="width:100%;">
+</div>
 
-Figure 8 in the paper is represented as follows:
+Like experiment 2, you can make changes to the callable ``run_all_tests()`` to replicate our results, as given in figures **8b and 8c**. Figure 8 in the paper is represented as follows:
 ![Figure 8a](https://github.com/sca-research/Multivariate-Non-profiled-Leakage-Detection/blob/main/Code/Figure_8.png)
 
-It is important to mention that this repository is limited only to the non-profiled leakage detection tests. To get the results corresponding to the Deep-net models, we recommend using the publicly available [DL-LA](https://github.com/Chair-for-Security-Engineering/DL-LA?tab=readme-ov-file) git repository. 
+It is important to note that this repository is limited to non-profiled leakage detection tests. To get the results corresponding to the Deep-net models, we recommend using the publicly available [DL-LA](https://github.com/Chair-for-Security-Engineering/DL-LA?tab=readme-ov-file) git repository. 
