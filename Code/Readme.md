@@ -28,12 +28,12 @@ python3 RP_dcor.py
 ```
 Apart from scalability, the correctness of our parallel implementation of Mv-dcov was verified by uncommenting the ``checking_correctness()`` main function in RP_dcor.py. We have implemented the fast MV-dcov utilizing the published paper on [A Statistically and Numerically Efficient Independence Test Based on Random Projections and Distance Covariance](https://www.frontiersin.org/journals/applied-mathematics-and-statistics/articles/10.3389/fams.2021.779841/full#supplementary-material). Here is the snippets of run-time scalability test of MV-dcov:
 
-<div style="height:50px; width:200px; overflow-y:auto; border:1px solid #ccc; padding:5px;">
+<div style="height:200px; width:200px; overflow:auto; border:1px solid #ccc;">
   <img 
     src="https://raw.githubusercontent.com/sca-research/Multivariate-Non-profiled-Leakage-Detection/main/Code/Screenshot_run_time.png"
-    style="width:100%; height:auto;"
+    style="min-width:400px; min-height:400px;"
   >
-</div>
+</div>>
 
 2. Simulated Multivariate Leakage Detection:
 For the simulated leakage detection, please run:
@@ -61,7 +61,17 @@ results_ = run_all_tests(
 ```
 The class ``Digitizer`` is defined in [testnbr_dist_1.py](https://github.com/Palash123-4/Multivariate-Non-profiled-Leakage-Detection/blob/main/Code/testnbr_dist_1.py) .
 
-You can call any subset of 8 tests from ``[ "mv_dcov", "hotelling", "diag", "mv_gtest", "tvla", "dcor", "chi2", "gtest"]``. This simulation experiment should be considered to reproduce figures **$1$ and $2$** of the paper.
+At present three abforementioned tests are considered for the out-of-the-box simulated experiment and stored in [HW_Norm_0.005_50.npy](https://github.com/sca-research/Multivariate-Non-profiled-Leakage-Detection/blob/main/Code/HW_Norm_0.005_50.npy). The snippet of the present compilation is given below:
+
+<div style="height:200px; width:200px; overflow:auto; border:1px solid #ccc;">
+  <img 
+    src="https://raw.githubusercontent.com/sca-research/Multivariate-Non-profiled-Leakage-Detection/main/Code/Screenshot_simulated_exp.png"
+    style="min-width:400px; min-height:400px;"
+  >
+</div>
+
+
+You can call any subset of 8 tests from ``[ "mv_dcov", "hotelling", "diag", "mv_gtest", "tvla", "dcor", "chi2", "gtest"]`` and able to reproduce figures **$1$ and $2$** of the paper.
 
 **Figure $1$** is related to univariate tests, i.e., `` ["tvla", "dcor", "chi2", "gtest"] ``:
 ![Figure 1](https://github.com/sca-research/Multivariate-Non-profiled-Leakage-Detection/blob/main/Code/Figure_1.png)
