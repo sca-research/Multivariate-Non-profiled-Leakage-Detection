@@ -1,5 +1,5 @@
 ## Multivariate-Non-profiled-Leakage-Detection
-<!-- This repository contains the practical implementation of several multivariate leakage detection tests considered in the IACR-Tches 2026, Volume 2 paper titled **Multivariate Leakage Detection**. The research was conducted by the Cybersecurity research group at the University of Klagenfurt, Austria. -->.
+<!-- This repository contains the practical implementation of several multivariate leakage detection tests considered in the IACR-Tches 2026, Volume 2 paper titled **Multivariate Leakage Detection**. The research was conducted by the Cybersecurity research group at the University of Klagenfurt, Austria. -->
 
 In this repository, we primarily focused on a comparative study of different non-profiled multivariate detection methods, along with multiplicity corrections for existing univariate detection methods.      
 
