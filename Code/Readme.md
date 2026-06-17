@@ -63,15 +63,15 @@ The class ``Digitizer`` is defined in [testnbr_dist_1.py](https://github.com/Pal
 
 At present, three aforementioned tests are considered for the out-of-the-box simulated experiment and stored in [HW_Norm_0.005_50.npy](https://github.com/sca-research/Multivariate-Non-profiled-Leakage-Detection/blob/main/Code/HW_Norm_0.005_50.npy). The snippet of the present compilation is given below:
 
-<div style="height:200px; width:200px; overflow:auto; border:1px solid #ccc;">
+<div style="height:300px; width:500px; overflow:auto; border:1px solid #ccc;">
   <img 
     src="https://raw.githubusercontent.com/sca-research/Multivariate-Non-profiled-Leakage-Detection/main/Code/Screenshot_simulated_exp.png"
-    style="min-width:400px; min-height:400px;"
+    style="min-width:700px; min-height:800px;"
   >
 </div>
 
 
-You can call any subset of 8 tests from ``[ "mv_dcov", "hotelling", "diag", "mv_gtest", "tvla", "dcor", "chi2", "gtest"]`` and be able to reproduce figures **$1$ and $2$** of the paper.
+You can call any subset of 8 tests from ``[ "mv_dcov", "hotelling", "diag", "mv_gtest", "tvla", "dcor", "chi2", "gtest"]`` and be able to reproduce figures **$1$ and $2$**.
 
 **Figure $1$** is related to univariate tests, i.e., `` ["tvla", "dcor", "chi2", "gtest"] ``:
 ![Figure 1](https://github.com/sca-research/Multivariate-Non-profiled-Leakage-Detection/blob/main/Code/Figure_1.png)
@@ -86,7 +86,7 @@ You can call any subset of 8 tests from ``[ "mv_dcov", "hotelling", "diag", "mv_
 ```
 python3 out_of_the_box_exp.py --exp present_pointwise
 ```
-You can see that it reproduces figure **8a** of the paper (see the attached figure at the bottom).
+You can see that it reproduces figure **8a** (see the attached figure at the bottom).
 
 - For multivariate leakage detection (i.e., comparing True positive rates), run:
 ```
@@ -99,7 +99,7 @@ At present, we only run for the best (in terms of producing a better true positi
   <img src="https://raw.githubusercontent.com/sca-research/Multivariate-Non-profiled-Leakage-Detection/main/Code/Screenshot_PRESENT_RC_3.png" style="width:100%;">
 </div>
 
-Like experiment 2, you can make changes to the callable ``run_all_tests()`` to replicate our results, as given in figures **8b and 8c**. Figure 8 in the paper is represented as follows:
+Like experiment 2, you can make changes to the callable ``run_all_tests()`` to replicate our results, as given in figures **8b and 8c**. Figure 8 is represented as follows:
 ![Figure 8a](https://github.com/sca-research/Multivariate-Non-profiled-Leakage-Detection/blob/main/Code/Figure_8.png)
 
 It is important to note that this repository is limited to non-profiled leakage detection tests. To get the results corresponding to the Deep-net models, we recommend using the publicly available [DL-LA](https://github.com/Chair-for-Security-Engineering/DL-LA?tab=readme-ov-file) git repository. 
