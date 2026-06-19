@@ -126,8 +126,8 @@ def run_all_tests(
         stat, cutoff = diag_test(n_1, n_2, n_dim, Tr_random, Tr_fixed)
         results["diag"] = stat > cutoff
         
-     ## To use mv_gtest one have to Digitise
-     ## the trace please see Digitizer class in testnbr_dist_1.py  
+     ## To use mv_gtest one have to Digitise the trace 
+     ## please see Digitizer class in testnbr_dist_1.py  
      
     if "mv_gtest" in enabled_tests:  
         Tr, V = _build_Tr_and_V_exact(Tr_fixed, Tr_random)

@@ -19,6 +19,17 @@ from mpmath import*
 from timeit import default_timer as timer # For evaluating the computation time
 
 
+## for running one of the main functions
+import argparse
+
+
+
+
+
+
+
+
+
 # Required to calculate the upper alpha point (cutoff) of gamma distribution
 def gamma_ratio(p): return np.exp(gammaln((p+1)/2) - gammaln(p/2))  # For Calculating C_p and C_q
 
@@ -235,10 +246,11 @@ def checking_correctness():
     
     # Define the mean vector and 'symmetric' Covariance matrix for multivariate Gaussian simulation
     mean_vector = np.repeat(3, dim_data)
-    A = 0.01 * np.random.rand(dim_data, dim_data) # increase the 0.01 to higher value will increase the variance values in Cov_matrix
+    delta_ = 0.1 # change the delta value for higher or lower dcov value
+    A = delta_ * np.random.rand(dim_data, dim_data) # increase the 0.01 to higher value will increase the variance values in Cov_matrix
     Cov_matrix = np.dot(A, A.transpose())  
     
-    n_samples = 3000  
+    n_samples = 500  
     print("Data size = {}".format(n_samples)) 
     
     # Simulated Data from Multivariate Gaussian Distribution----------------
@@ -248,15 +260,19 @@ def checking_correctness():
     pred_lkg = X.T[(dim_data-2):]
     
     dim_Tr = np.shape(Tr)[0]
-    print("dimension of Tr = {}".format(dim_Tr))
+    dim_pred_lkg = np.shape(pred_lkg)[0]
+
+
+    print("dimension of X = {}".format(dim_Tr))
+    print("dimension of Y = {}".format(dim_pred_lkg))    
     
     # For checking accuracy of the 'fast' dcov estimator with the 'naive' one    
-    print("distance covariance based on naive approach ={} ".format(  # Uncomment this part for higher(>5) dim_data
+    print("distance covariance between X and Y based on naive approach ={} ".format(  # Uncomment this part for higher(>5) dim_data
        u_distance_covariance_sqr(Tr.T, pred_lkg.T, method='naive')))  
     
     start = timer()
     print("Computing fast distance covariance = {}".format(
-        u_dist_cov_sqr_mv(Tr.T, pred_lkg.T)))
+        u_dist_cov_sqr_mv(Tr.T, pred_lkg.T , n_projs = 100)))
     end = timer()
     print("Time to compute fast distance covariance in seconds = {}".format(end - start))
 
@@ -270,6 +286,7 @@ def scalability_testing():
     
     # Specifiy the dimension n_d
     n_samples = int(2e03)
+    print("Computing runtime in seconds\n--------------------")
     for dim_data in range(10, 1500, 100): 
     
         # Define the mean vector and 'symmetric' Covariance matrix for multivariate Gaussian simulation
@@ -288,15 +305,46 @@ def scalability_testing():
         u_dist_cov_sqr_mv(Tr.T, pred_lkg.T)
         end = timer()
         
-        print("No. of dimensions = {}, Run_time ={}".format( dim_data ,   end - start))
+        
+        print("No. of dimensions of X = {}, Run_time ={}".format( dim_data ,   end - start))
+
+
+
+
+
+def parse_args():
+    parser = argparse.ArgumentParser(
+        description="Run MVDCOV for scalability checking"
+    )
+
+    parser.add_argument(
+        "--exp",
+        required=True,
+        choices=[
+            "runtime",
+            "correctness",
+        ],
+        help="Experiment to run",
+    )
+
+    return parser.parse_args()
+
+
+
+if __name__ == "__main__":
+    args = parse_args()
+
+    if args.exp == "runtime":
+        scalability_testing()
+
+    elif args.exp == "correctness":
+        checking_correctness()
 
 
 
 
 
 
-
-
-if __name__ == '__main__':
-    # checking_correctness() 
-    scalability_testing()
+# if __name__ == '__main__':
+#     # checking_correctness() 
+#     scalability_testing()

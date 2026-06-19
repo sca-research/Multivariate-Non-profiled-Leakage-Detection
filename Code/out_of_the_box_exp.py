@@ -23,7 +23,7 @@ from scipy.special import gammaln
 
 
 
-## for running one of the main function
+## for running one of the main functions
 import argparse
 
 

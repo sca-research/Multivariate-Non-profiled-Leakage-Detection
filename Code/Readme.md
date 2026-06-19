@@ -22,11 +22,18 @@ sudo pip install numpy scipy pandas dcor mpmath numba matplotlib tqdm
 
 ### USAGE:
 We are mainly examining three types of experiments: 
-1. The Scalability Test of the parallel implementation of the multivariate distance covariance metric will be obtained by running:
+1. The Scalability Test of the parallel implementation of the multivariate distance covariance (Mv-dcov) metric will be conducting both **corretness** and **runtime**. For runtime experiment, run in the terminal:
 ```
-python3 RP_dcor.py
+python3 RP_dcor.py --exp correctness
 ```
-Apart from scalability, the correctness of our parallel implementation of Mv-dcov was verified by uncommenting the ``checking_correctness()`` main function in RP_dcor.py. We have implemented the fast MV-dcov utilising the published paper on [A Statistically and Numerically Efficient Independence Test Based on Random Projections and Distance Covariance](https://www.frontiersin.org/journals/applied-mathematics-and-statistics/articles/10.3389/fams.2021.779841/full#supplementary-material). Here is the snippet of the run-time scalability test of MV-dcov:
+The correctness of our parallel implementation of Mv-dcov was verified by:
+```
+python3 RP_dcor.py --exp runtime
+```
+
+Here, We have implemented the fast MV-dcov utilising the published paper on [A Statistically and Numerically Efficient Independence Test Based on Random Projections and Distance Covariance](https://www.frontiersin.org/journals/applied-mathematics-and-statistics/articles/10.3389/fams.2021.779841/full#supplementary-material). 
+
+The snippet of the run-time scalability test of MV-dcov:
 
 <div style="height:300px; width:500px; overflow:auto; border:1px solid #ccc;">
   <img 
@@ -36,7 +43,7 @@ Apart from scalability, the correctness of our parallel implementation of Mv-dco
 </div>
 
 2. Simulated Multivariate Leakage Detection:
-For the simulated leakage detection, please run:
+For the simulated leakage detection, run:
 ```
 python3 out_of_the_box_exp.py --exp simulated_exp
 ```
