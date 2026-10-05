@@ -8,6 +8,16 @@ In this repository, we primarily focused on a comparative study of different non
 - We have analysed both the False positive rate and the True positive rate of the aforementioned tests via p-value computation and then computing the statistical power of the tests for a certain number of iterations.  
 User guide and detailed instructions of our `Python` implementations are provided in [Code](https://github.com/Palash123-4/Multivariate-Non-profiled-Leakage-Detection/tree/main/Code) folder.
 
+## Installation
+Python 3.9.x is the tested version (validated with Python 3.9.25). The current pinned NumPy version is not compatible with Python 3.14; other Python versions have not been validated.
+
+Create and activate a Conda environment, then install the repository requirements from the repository root:
+```bash
+conda create -n leakage-detection python=3.9
+conda activate leakage-detection
+python -m pip install -r requirements.txt
+```
+
 ## Datasets
 We have considered both simulated and practical case studies for our implementation.
 - In simulation experiments, we have considered different linear leakage models, like hamming weight, hamming distance, weighted hamming weight, and one non-linear model (by considering the double permutation). Along with leakage models, we also consider the Gaussian and non-Gaussian additive noises. The multivariate leakage simulation is provided in [testnbr_dist_1.py](https://github.com/Palash123-4/Multivariate-Non-profiled-Leakage-Detection/blob/main/Code/testnbr_dist_1.py) Python script.
