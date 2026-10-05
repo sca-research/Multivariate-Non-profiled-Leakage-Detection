@@ -9,8 +9,8 @@ Created on Fri Jan 23 19:04:28 2026
 import numpy as np
 from tqdm import tqdm
 
-from testnbr_dist_1 import *
-from leakage_test_runner import run_all_tests
+from trace_simulation import *
+from leakage_test_runner import run_all_tests, mi_plug_in
 from dcor import u_distance_correlation_sqr
 from scipy.stats import  chi2, chi2_contingency,  ttest_ind
 from pandas import crosstab

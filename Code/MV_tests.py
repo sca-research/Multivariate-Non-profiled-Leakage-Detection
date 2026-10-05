@@ -8,7 +8,7 @@ Created on Tue Mar 26 13:14:15 2024
 Multivariate Leakage Detection Methods-------------------------------------------------------
 """
 
-from  testnbr_dist_1 import *
+from  trace_simulation import *
 
 from scipy.stats import  chi2, f
 from scipy.stats import ttest_ind, chi2_contingency
@@ -108,6 +108,7 @@ def mv_gtest(X, Y, alpha = 0.05):
     
     n_trace = len(Y)
         
+    from leakage_test_runner import mi_plug_indd  # lazy import: avoids circular import
     D_MI_value = mi_plug_indd(Y, X) * np.log(2)
     
     unique_X = np.unique(X, axis = 0)
@@ -239,6 +240,7 @@ def gtest_adjusted_alpha(p, X, Y, alpha_ = 0.05):
     
     
     count_gtest = 0 
+    from leakage_test_runner import mi_plug_in  # lazy import: avoids circular import
     for i in range(p):
         D_MI_value = mi_plug_in( Y, X[:, i]) * np.log(2) 
         
