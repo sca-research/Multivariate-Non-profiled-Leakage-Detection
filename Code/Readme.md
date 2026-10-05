@@ -15,13 +15,13 @@ The dependency versions are maintained in the repository-root `requirements.txt`
 
 ### USAGE:
 We are mainly examining three types of experiments: 
-1. The **scalability** test of the parallel implementation of the multivariate distance covariance (**MV-dcov**) checks both **correctness** and **runtime**. From the repository root, run:
+1. The **scalability** test of the parallel implementation of the multivariate distance covariance (**MV-dcov**) checks both **correctness** and **runtime**. From the `Code` folder, run:
 ```
-cd Code && python RP_dcor.py --exp runtime
+python RP_dcor.py --exp runtime
 ```
 To check correctness of the parallel MV-dcov implementation, run:
 ```
-cd Code && python RP_dcor.py --exp correctness
+python RP_dcor.py --exp correctness
 ```
 
 Here, We have implemented the fast MV-dcov utilising the published paper on [A Statistically and Numerically Efficient Independence Test Based on Random Projections and Distance Covariance](https://www.frontiersin.org/journals/applied-mathematics-and-statistics/articles/10.3389/fams.2021.779841/full#supplementary-material). 
@@ -36,13 +36,13 @@ The snippet of the **run-time** scalability test of MV-dcov:
 </div>
 
 2. Simulated Multivariate Leakage Detection:
-From the repository root, run the simulated leakage detection with:
+From the `Code` folder, run the simulated leakage detection with:
 ```
-cd Code && python out_of_the_box_exp.py --exp simulated_exp
+python out_of_the_box_exp.py --exp simulated_exp
 ```
 The defaults are the `hamming_weight` leakage model, `gaussian` noise, and `sigma=14.14`. Choose other built-in models from the command line:
 ```
-cd Code && python out_of_the_box_exp.py --exp simulated_exp --leakage-model nonlinear --noise-model discrete_laplace --sigma 14.14
+python out_of_the_box_exp.py --exp simulated_exp --leakage-model nonlinear --noise-model discrete_laplace --sigma 14.14
 ```
 Leakage choices are `hamming_weight` and `nonlinear` (the DES S-box output); noise choices are `gaussian`, `laplace` (continuous Laplace with scale `sigma/√2`, so `sigma` is the standard deviation), `discrete_laplace`, and `none`. For custom models, pass a callable as `leakage_model` to `mv_trace`; it receives one intermediate value. A custom `noise_model` callable receives `(shape, sigma)` and must return an array with that shape. The result filename records the selected leakage model, noise model, and sigma.
 ```
@@ -83,7 +83,7 @@ results_ = run_all_tests(
 ```
 The class ``Digitizer`` is defined in [trace_simulation.py](https://github.com/Palash123-4/Multivariate-Non-profiled-Leakage-Detection/blob/main/Code/trace_simulation.py) .
 
-Each simulated run saves results to `simulated_<leakage-model>_<noise-model>_sigma_<sigma>_<dimension>.npy`. The tracked [HW_Norm_0.005_50.npy](https://github.com/sca-research/Multivariate-Non-profiled-Leakage-Detection/blob/main/Code/HW_Norm_0.005_50.npy) is a previously generated Hamming-weight/Gaussian result. The snippet of that result is shown below:
+Each simulated run saves results to `simulated_<leakage-model>_<noise-model>_sigma_<sigma>_<dimension>.npy`. The tracked [simulated_hamming_weight_gaussian_sigma_14.14_50.npy](https://github.com/sca-research/Multivariate-Non-profiled-Leakage-Detection/blob/main/Code/simulated_hamming_weight_gaussian_sigma_14.14_50.npy) is a generated Hamming-weight/Gaussian result (`sigma=14.14`). The snippet of that result is shown below:
 
 <div style="height:300px; width:500px; overflow:auto; border:1px solid #ccc;">
   <img 
@@ -105,17 +105,17 @@ You can call any subset of 8 tests from ``[ "mv_dcov", "hotelling", "diag", "mv_
 3. Leakage Detection on PRESENT-RC dataset:
 - After downloading and unpacking the dataset as described in `PRESENT-RC/Readme.md`, generate `Traces_PRESENT_RC.npy` from the `PRESENT-RC` directory:
 ```
-cd PRESENT-RC && python DUT.py
+cd ../PRESENT-RC && python DUT.py
 ```
-- From the repository root, run point-wise leakage detection:
+- Run point-wise leakage detection:
 ```
-cd PRESENT-RC && python ../Code/out_of_the_box_exp.py --exp present_pointwise
+cd ../PRESENT-RC && python ../Code/out_of_the_box_exp.py --exp present_pointwise
 ```
 You can see that it reproduces figure **8a** (see the attached figure at the bottom).
 
-- From the repository root, run multivariate leakage detection (i.e., comparing True positive rates):
+- Run multivariate leakage detection (i.e., comparing True positive rates):
 ```
-cd PRESENT-RC && python ../Code/out_of_the_box_exp.py --exp present_multivariate
+cd ../PRESENT-RC && python ../Code/out_of_the_box_exp.py --exp present_multivariate
 ``` 
 At present, we only run for the best (in terms of producing a better true positive rate) multivariate test (i.e., the $D$-test, the red solid line in **8c**), and the best univariate test ( $G$-test, the green dashed line in **8b**). The snippets of the multivariate tests are as follows:
 <div style="height:300px; width:500px; overflow-y:auto;">
