@@ -19,18 +19,22 @@ The converter uses NumPy and PyYAML, which are included in the root
 
 Download `FPGA_PRESENT_RANDOMIZED_CLOCK.zip` from the
 [DL-LA dataset link](https://drive.google.com/file/d/1gYerTpnJF_u-BrP5ny0c6rcgbuKQlE4h/view)
-and extract it into this directory. The default configuration expects:
+and extract it so the files end up under `PRESENT-RC/Traces/`. The default configuration expects:
 
 ```text
 PRESENT-RC/
-├── FPGA_PRESENT_RANDOMIZED_CLOCK/
-│   └── Traces_1.dat
+├── Traces/
+│   └── FPGA_PRESENT_RANDOMIZED_CLOCK/
+│       └── Traces_1.dat
 ├── DUT.py
 └── traces.yml
 ```
 
 The binary files are not included in this repository. Check that the extracted
-directory and file names match `path` and `file_pattern` in `traces.yml`.
+directory matches `path` in `traces.yml`. Files are expected to be named `Traces_<n>.dat`, starting from 1.
+
+`traces.yml` is taken unmodified from the
+[DL-LA repository](https://github.com/Chair-for-Security-Engineering/DL-LA).
 
 ## Convert the traces
 
