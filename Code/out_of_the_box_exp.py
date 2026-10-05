@@ -35,7 +35,11 @@ def chisquare_cdf(x, k):
 
 
 
-def simulated_exp():
+def simulated_exp(
+    leakage_model="hamming_weight",
+    noise_model="gaussian",
+    sigma=14.14,
+):
     """
     Computing True Positive rates for Leakage Detection 
     on simulated traces based on small set of sets
@@ -44,7 +48,7 @@ def simulated_exp():
 
     n_dim = 50
     ckey = 210
-    sigma = 14.14
+    # sigma = 14.14
 
     n_trial = 50
 
@@ -61,9 +65,25 @@ def simulated_exp():
         for _ in tqdm(range(n_trial)):
 
             Tr_random = mv_trace(
-                n_trace, n_dim, AES_Sbox, ckey, sigma, fix_input=False)
+                n_trace,
+                n_dim,
+                AES_Sbox,
+                ckey,
+                sigma,
+                fix_input=False,
+                leakage_model=leakage_model,
+                noise_model=noise_model,
+            )
             Tr_fixed = mv_trace(
-                n_trace, n_dim, AES_Sbox, ckey, sigma, fix_input=True) 
+                n_trace,
+                n_dim,
+                AES_Sbox,
+                ckey,
+                sigma,
+                fix_input=True,
+                leakage_model=leakage_model,
+                noise_model=noise_model,
+            )
             
             
             ## Discretize the continuous traces for chi2 and gtest (For HW model nbins = 9)
@@ -118,7 +138,7 @@ def simulated_exp():
         
         # Same save semantics
     np.save(
-        f"HW_Norm_{round(1 / (sigma ** 2), 3)}_{n_dim}.npy",
+        f"simulated_{leakage_model}_{noise_model}_sigma_{sigma:g}_{n_dim}.npy",
         z,
     )
     
@@ -337,6 +357,24 @@ def parse_args():
         ],
         help="Experiment to run",
     )
+    parser.add_argument(
+        "--leakage-model",
+        choices=sorted(LEAKAGE_MODELS),
+        default="hamming_weight",
+        help="Simulated leakage model (default: hamming_weight)",
+    )
+    parser.add_argument(
+        "--noise-model",
+        choices=sorted(NOISE_MODELS),
+        default="gaussian",
+        help="Simulated noise model (default: gaussian)",
+    )
+    parser.add_argument(
+        "--sigma",
+        type=float,
+        default=14.14,
+        help="Noise standard deviation for simulated traces (default: 14.14)",
+    )
 
     return parser.parse_args()
 
@@ -346,7 +384,11 @@ if __name__ == "__main__":
     args = parse_args()
 
     if args.exp == "simulated_exp":
-        simulated_exp()
+        simulated_exp(
+            leakage_model=args.leakage_model,
+            noise_model=args.noise_model,
+            sigma=args.sigma,
+        )
 
     elif args.exp == "present_pointwise":
         PRESENT_RC_pointwise()

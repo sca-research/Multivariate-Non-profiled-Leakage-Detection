@@ -44,8 +44,67 @@ def Non_lin(a):
     return DES_Sbox[lkg_6LSB(a)]
 
 
+def _gaussian_noise(shape, sigma):
+    return np.random.normal(0.0, sigma, size=shape)
+
+
+def _discrete_laplace_noise(shape, sigma):
+    if sigma == 0:
+        return np.zeros(shape)
+
+    variance = sigma**2
+    decay = variance / (
+        variance + 1 + math.sqrt(2 * variance + 1)
+    )
+    distribution_parameter = -math.log(decay)
+    return dlaplace.rvs(distribution_parameter, size=shape)
+
+
+def _laplace_noise(shape, sigma):
+    # Laplace variance is 2*b^2, so b = sigma/sqrt(2) gives standard deviation sigma
+    return np.random.laplace(0.0, sigma / math.sqrt(2), size=shape)
+
+
+def _no_noise(shape, sigma):
+    return np.zeros(shape)
+
+
+LEAKAGE_MODELS = {
+    "hamming_weight": ham_wt,
+    "nonlinear": Non_lin,
+}
+
+NOISE_MODELS = {
+    "gaussian": _gaussian_noise,
+    "laplace": _laplace_noise,
+    "discrete_laplace": _discrete_laplace_noise,
+    "none": _no_noise,
+}
+
+
+def _resolve_model(model, available_models, model_type):
+    if callable(model):
+        return model
+    if model not in available_models:
+        choices = ", ".join(available_models)
+        raise ValueError(
+            f"Unknown {model_type} {model!r}. Choose from: {choices}, or pass a callable."
+        )
+    return available_models[model]
+
+
 ## Multivariate Leakage Simulation-------------------------------------------------------------------------------------
-def mv_trace(n_trace, n_dim, sbox, ckey, sigma, fix_input = False):
+def mv_trace(
+    n_trace,
+    n_dim,
+    sbox,
+    ckey,
+    sigma,
+    fix_input=False,
+    *,
+    leakage_model="hamming_weight",
+    noise_model="gaussian",
+):
     '''
     Parameters
     ----------
@@ -53,20 +112,27 @@ def mv_trace(n_trace, n_dim, sbox, ckey, sigma, fix_input = False):
     sbox : Subbyte operation based on lookup table
     ckey : Correct key (dtype= np.uint8)
     pt: n-bit plaintext
-    sigma : standard deviation of error vector
+    sigma : standard deviation of the noise
     dim: dimension of the traces or the number of sample points
+    leakage_model : str or callable
+        Built-in name or a callable mapping an intermediate value to leakage.
+    noise_model : str or callable
+        Built-in name or a callable accepting (shape, sigma) and returning noise.
 
     Returns
     -------
     Simulated Multivariate Traces for fixed or random inrtermediate 
     '''
     
-    ## We fix or randomized the 'plain_text(X)' (input) to generate the traces from fixed or random input 
-    
-    
-    if fix_input == False:
+    if not np.isfinite(sigma) or sigma < 0:
+        raise ValueError("sigma must be a finite, non-negative number")
+
+    leakage_fn = _resolve_model(leakage_model, LEAKAGE_MODELS, "leakage model")
+    noise_fn = _resolve_model(noise_model, NOISE_MODELS, "noise model")
+
+    if not fix_input:
         pt = np.random.randint(0, 256, n_trace, dtype = np.uint8)
-    if fix_input == True:
+    else:
         p_text = np.random.randint(0, 256, 1, dtype = np.uint8)
         pt = np.repeat(p_text, n_trace)
     
@@ -78,22 +144,18 @@ def mv_trace(n_trace, n_dim, sbox, ckey, sigma, fix_input = False):
     for i in np.arange(0, n_trace):
         s_out = np.empty(n_dim, dtype = np.uint8)
         s_out[0] = sbox[pt[i] ^ ckey]
-               
-        Tr[i, 0] =  float(ham_wt(s_out[0])) + np.random.normal(0,sigma,1)     # for ham_wt(Y) + gaussian noise  
-        # Tr[i, 0] = float(Non_lin(s_out[0])) + np.random.normal(0,sigma,1)    # for non_lin(Y) + gaussian noise
-        # Tr[i, 0] =  int(ham_wt(s_out[0])) + dlaplace.rvs(sigma, 1)  # for ham_wt(Y) + discrete laplacian noise               
-        # Tr[i, 0] =  int(Non_lin(s_out[0]) + dlaplace.rvs(sigma, 1)) # for non_lin(Y) + discrete laplacian noise                
-        
+        Tr[i, 0] = leakage_fn(int(s_out[0]))
+
         for j in range(1, n_dim):
             s_out[j] = sbox[s_out[j-1] ^ round_key[j-1]]
-            # s_out[j] = s_out[j-1] ^ round_key[j-1]
-            
-            Tr[i, j] =  float( ham_wt(s_out[j])) + np.random.normal(0,sigma,1)
-            # Tr[i, j] =  float( Non_lin(s_out[j])) + np.random.normal(0,sigma,1)
-            # Tr[i, j] =  int(ham_wt(s_out[j])) + dlaplace.rvs(sigma,1)
-            # Tr[i, j] =  int(Non_lin(s_out[j])) + dlaplace.rvs(sigma,1)
-        del s_out
-    return Tr
+            Tr[i, j] = leakage_fn(int(s_out[j]))
+
+    noise = np.asarray(noise_fn(Tr.shape, sigma))
+    if noise.shape != Tr.shape:
+        raise ValueError(
+            f"Noise model returned shape {noise.shape}; expected {Tr.shape}"
+        )
+    return Tr + noise
 
 
 
