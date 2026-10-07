@@ -237,7 +237,7 @@ def u_dist_cov_sqr_mv_test(X, Y, n_projs = 1000, method ='mergesort'):
 
 def checking_correctness():
     
-    '''
+    r'''
     Checking the correctnes of fast evaluated  "u_dist_cov_sqr_mv()" comparing with the naive $\Omega(X,Y)$ "u_distance_covariance_sqr" 
     '''
     
