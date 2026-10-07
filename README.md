@@ -26,7 +26,7 @@ python -m pip install -r requirements.txt
 
 ## Datasets
 We have considered both simulated and practical case studies for our implementation.
-- In simulation experiments, we have considered different linear leakage models, like hamming weight, hamming distance, weighted hamming weight, and one non-linear model (by considering the double permutation). Along with leakage models, we also consider the Gaussian and non-Gaussian additive noises. The multivariate leakage simulation is provided in [testnbr_dist_1.py](https://github.com/Palash123-4/Multivariate-Non-profiled-Leakage-Detection/blob/main/Code/testnbr_dist_1.py) Python script.
+- In simulation experiments, we have considered different linear leakage models, like hamming weight, hamming distance, weighted hamming weight, and one non-linear model (by considering the double permutation). Along with leakage models, we also consider the Gaussian and non-Gaussian additive noises. The multivariate leakage simulation is provided in the [trace_simulation.py](https://github.com/Palash123-4/Multivariate-Non-profiled-Leakage-Detection/blob/main/Code/trace_simulation.py) Python script.
 - We have considered a practical case study for the side-channel traces from an unprotected implementation of PRESENT block cypher as provided by [DL-LA](https://github.com/Chair-for-Security-Engineering/DL-LA). The download instructions for this dataset are available in [PRESENT-RC](https://github.com/Palash123-4/Multivariate-Non-profiled-Leakage-Detection/tree/main/PRESENT-RC)   
 
 ## References
