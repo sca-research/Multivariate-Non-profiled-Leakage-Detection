@@ -11,6 +11,12 @@ User guide and detailed instructions of our `Python` implementations are provide
 ## Installation
 Python 3.9.x is the tested version (validated with Python 3.9.25). The current pinned NumPy version is not compatible with Python 3.14; other Python versions have not been validated.
 
+Clone the repository and move into its root directory:
+```bash
+git clone https://github.com/sca-research/Multivariate-Non-profiled-Leakage-Detection.git
+cd Multivariate-Non-profiled-Leakage-Detection
+```
+
 Create and activate a Conda environment, then install the repository requirements from the repository root:
 ```bash
 conda create -n leakage-detection python=3.9
@@ -22,6 +28,10 @@ python -m pip install -r requirements.txt
 We have considered both simulated and practical case studies for our implementation.
 - In simulation experiments, we have considered different linear leakage models, like hamming weight, hamming distance, weighted hamming weight, and one non-linear model (by considering the double permutation). Along with leakage models, we also consider the Gaussian and non-Gaussian additive noises. The multivariate leakage simulation is provided in [testnbr_dist_1.py](https://github.com/Palash123-4/Multivariate-Non-profiled-Leakage-Detection/blob/main/Code/testnbr_dist_1.py) Python script.
 - We have considered a practical case study for the side-channel traces from an unprotected implementation of PRESENT block cypher as provided by [DL-LA](https://github.com/Chair-for-Security-Engineering/DL-LA). The download instructions for this dataset are available in [PRESENT-RC](https://github.com/Palash123-4/Multivariate-Non-profiled-Leakage-Detection/tree/main/PRESENT-RC)   
+
+## References
+- Olivier Bronchain, Tobias Schneider, and François-Xavier Standaert. [“Multi-Tuple Leakage Detection and the Dependent Signal Issue.”](https://tches.iacr.org/index.php/TCHES/article/view/7394) *IACR Transactions on Cryptographic Hardware and Embedded Systems*, 2019(2), 318–345. DOI: [10.13154/tches.v2019.i2.318-345](https://doi.org/10.13154/tches.v2019.i2.318-345).
+- Aakash Chowdhury and Elisabeth Oswald. [“Multivariate Leakage Detection.”](https://tches.iacr.org/index.php/TCHES/article/view/12890) *IACR Transactions on Cryptographic Hardware and Embedded Systems*, 2026(2), 296–324. DOI: [10.46586/tches.v2026.i2.296-324](https://doi.org/10.46586/tches.v2026.i2.296-324).
 
 ## Acknowledgement
 This project is supported in part by the Austrian Science Fund (FWF) 10.55776/F85 (SFB SpyCode) and by the  EU Horizon project (enCrypton, grant agreement number 101079319).
